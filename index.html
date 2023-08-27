@@ -32,11 +32,11 @@
 
 <div class="container" style="padding-top: 20px;">
     <div class="col-md-12" style="padding-top: 20px; text-align: center">
-        <h1 id="thisWeek">이번주 마트 염?</h1>
-        <h1 id="thisDay">오늘 마트 염?</h1>
+        <h1 id="thisWeek" style = "display : none;">이번주 마트 염?</h1>
+        <h1 id="thisDay" style = "display : none;">오늘 마트 염?</h1>
         <div style="padding-top : 50px;"></div>
-        <p class="isOpen opened">ㅇㅇ</p>
-        <p class="isOpen closed">ㄴㄴ</p>
+        <p class="isOpen opened" style = "display : none;">ㅇㅇ</p>
+        <p class="isOpen closed" style = "display : none;">ㄴㄴ</p>
     </div>
 </div>
 
@@ -44,15 +44,17 @@
 <script>
     $(document).ready(function () {
         let today = new Date();
+
         //일~토 0~6
         let days = today.getDay();
         console.log(today + " " + days);
         //일요일이라면 오늘 출력
 
         if (days === 0) {
-            $("#thisWeek").css('display', 'none');
+            $("#thisDay").css('display', 'block');
+            days = 7;
         } else {
-            $("#thisDay").css('display', 'none');
+            $("#thisWeek").css('display', 'block');
         }
 
         //날짜 - 요일 + 6/ 7 의 값이 (소수점 내림) 그 주의 일요일이 몇번째 일요일인지의 값을 가짐
@@ -62,9 +64,9 @@
         console.log(thisWeekNumber);
         if (thisWeekNumber % 2 === 0 && thisWeekNumber < 6) {
             //2n번째 일요일이라면 휴무임, 단 6주째라면 그 주는 다음달로 넘어가기 때문에 그 주에는 마트를 열게됨
-            $(".opened").css('display', 'none');
+            $(".closed").css('display', 'block');
         } else {
-            $(".closed").css('display', 'none');
+            $(".opened").css('display', 'block');
         }
     });
 
